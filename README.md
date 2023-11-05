@@ -1,3 +1,40 @@
+from typing import Union
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+
+@app.get("/items/{item_id}")
+def read_item(item_id: int, type: Union[str, None] = None):
+    return {"item_id": item_id, "item_type": type}
+
+
+http://127.0.0.1:8000/items/1?type=mobiles  ---->    {"item_id":1,"item_type":"mobiles"}
+
+
+
+
+get_request(http://127.0.0.1:8000/items/1?q=7676) --> response -->{"item_id":1,"q":"7676"}
+
+get_request(http://127.0.0.1:8000/items/1?q={%22type%22:%22mobiles%22}) --> response -->{"item_id":1,"q":"{\"type\":\"mobiles\"}"}
+
+
+http://127.0.0.1:8000/items/1?q={type:mobiles}   ---->    {"item_id":1,"q":"{type:mobiles}"}
+
+
+
+
+
+
+
+
+
 Backend Internship Assignment: User Management System
 
 Objective:
